@@ -1,4 +1,4 @@
-# @storykit/assets-skill
+# storykit-assets-skill
 
 > Agent skill: find and plug in free, ready-made **StoryKit design blocks** — charts, interactive
 > widgets, illustrations, type styles, themes — over the public StoryKit asset API.
@@ -14,7 +14,7 @@ roadmap.)
 ### Claude Code
 
 ```bash
-npx @storykit/assets-skill install
+npx storykit-assets-skill install
 ```
 
 Installs to `.claude/skills/storykit-assets/SKILL.md`. Reload skills, then ask:
@@ -24,7 +24,7 @@ Installs to `.claude/skills/storykit-assets/SKILL.md`. Reload skills, then ask:
 ### Other agents / custom location
 
 ```bash
-npx @storykit/assets-skill install --dir ./skills
+npx storykit-assets-skill install --dir ./skills
 ```
 
 Or just download the skill file:
@@ -44,6 +44,6 @@ The skill drives the free API at `https://asset.storykit.space/api/v1`:
 - plugs it into the project the way that fits (embed snippet / copy code / render from JSON),
 - composes a themed page and a `.zip` export.
 
-Prefer to call it yourself or from an IDE chat? See also **[@storykit/mcp](https://www.npmjs.com/package/@storykit/mcp)**.
+Prefer to call it yourself or from an IDE chat? See also **[storykit-mcp](https://www.npmjs.com/package/storykit-mcp)**.
 
 MIT licensed.

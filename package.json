@@ -1,8 +1,9 @@
 {
-  "name": "@storykit/assets-skill",
+  "name": "storykit-assets-skill",
   "version": "0.1.0",
-  "description": "Agent skill: find and plug in free, ready-made StoryKit design blocks (charts, widgets, illustrations, themes) over the public StoryKit asset API.",
+  "description": "Agent skill: find and plug in free, ready-made StoryKit design blocks (charts, widgets, illustrations, themes) over the public StoryKit asset API (storykit.space).",
   "license": "MIT",
+  "author": "aryan0078 (https://storykit.space)",
   "type": "module",
   "bin": {
     "storykit-skill": "bin/install.js"

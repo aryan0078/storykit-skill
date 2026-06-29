@@ -5,8 +5,8 @@
  * Copies SKILL.md into a skills directory the agent can discover. Defaults to
  * `.claude/skills/storykit-assets/` (Claude Code); override with `--dir <path>`.
  *
- *   npx @storykit/assets-skill install
- *   npx @storykit/assets-skill install --dir ./skills
+ *   npx storykit-assets-skill install
+ *   npx storykit-assets-skill install --dir ./skills
  */
 import { fileURLToPath } from 'node:url'
 import { dirname, join, resolve } from 'node:path'
@@ -22,7 +22,7 @@ const targetDir = dirFlag !== -1 && args[dirFlag + 1]
   : resolve('.claude', 'skills', 'storykit-assets')
 
 if (!existsSync(src)) {
-  console.error('Could not find SKILL.md in the package. Reinstall @storykit/assets-skill.')
+  console.error('Could not find SKILL.md in the package. Reinstall storykit-assets-skill.')
   process.exit(1)
 }
 
