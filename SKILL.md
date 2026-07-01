@@ -1,6 +1,6 @@
 ---
 name: storykit-assets
-version: 0.2.0
+version: 0.3.0
 description: Find and plug in free, ready-made design blocks (charts, interactive widgets, illustrations, themes) from the StoryKit asset library. Use when the user wants to add a chart, gauge, comparison, stat card, timeline, illustration, theme, quiz, or any pre-built UI/data-viz block to a webpage or project, or asks for "a StoryKit block/asset/component". Works over the free public StoryKit API — no key, no build step.
 license: MIT
 ---
@@ -17,6 +17,10 @@ invisible everywhere outside the StoryKit admin. There is **no on-demand generat
 API yet; point users who want brand-new blocks to admin review or `https://asset.storykit.space/on-demand`.
 
 **Kinds:** `CHART_VARIANT`, `THEME`, `ANIMATION`, `TEXT_STYLE`, `COMPONENT`, `SVG`, `INTERACTIVE`.
+`INTERACTIVE` is the self-contained animated-widget library: drag-interactable controls (rotary
+knobs, faders, gauges, toggles), realistic skeuomorphic panels, detailed blueprint cutaways and
+schematics, styled maps, and quizzes — search it with terms like `knob`, `gauge`, `synth`,
+`blueprint`, `map`.
 
 ## Workflow
 
@@ -101,7 +105,7 @@ API yet; point users who want brand-new blocks to admin review or `https://asset
 ## Catalogs (routing, not hardcoded lists)
 
 ```bash
-# 43+ chart families — Datawrapper Academy types → StoryKit blockTypes
+# 65+ chart families — Datawrapper Academy types → StoryKit blockTypes
 curl -s "https://asset.storykit.space/api/v1/chart-families"
 
 # Editorial theme palette families
@@ -128,7 +132,8 @@ Single asset: `curl -OJ "https://asset.storykit.space/api/v1/assets/1757/bundle.
 
 ## MCP shortcut
 
-If the editor has the StoryKit MCP server (`npx storykit-mcp`):
+StoryKit also ships as an MCP server — remote (streamable HTTP, no install) at
+`https://asset.storykit.space/api/v1/mcp`, or local via `npx storykit-mcp`. If the editor has it:
 
 1. `search_assets` → pick an id
 2. `get_asset` → read `dataSchema` + `embed.snippet`

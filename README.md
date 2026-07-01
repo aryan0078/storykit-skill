@@ -42,10 +42,10 @@ The skill drives the free API at `https://asset.storykit.space/api/v1`:
 - searches the library by text + kind (`CHART_VARIANT`, `COMPONENT`, `INTERACTIVE`, `THEME`, …),
 - fetches an asset's full structure (`descriptor`, `dataSchema`, html/css/js, embed snippet),
 - plugs your rows in via `data-sk-items` or `StoryKit.mount()`,
-- routes chart picks through `/chart-families` (43+ families),
+- routes chart picks through `/chart-families` (65+ families),
 - composes a themed multi-block `.zip` export (`/bundle.zip?ids=…&theme=…`).
 
-Prefer to call it yourself or from an IDE chat? See also **[storykit-mcp](https://www.npmjs.com/package/storykit-mcp)**.
+Prefer to call it yourself or from an IDE chat? See also **[storykit-mcp](https://www.npmjs.com/package/storykit-mcp)** — or point a streamable-HTTP MCP client straight at the hosted endpoint `https://asset.storykit.space/api/v1/mcp` (nothing to install).
 
 ## Quick examples
 
