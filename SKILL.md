@@ -168,6 +168,13 @@ StoryKit also ships as an MCP server — remote (streamable HTTP, no install) at
 
 ## Create stories on storykit.space (BYOM — no key, no signup)
 
+**Just give it a topic.** When someone says "make a StoryKit essay about X", that's the whole
+brief — YOU do the research and author the full StorySpec (or a bespoke full-page microsite) to the
+standard below, then import it. Read the live contract first; it encodes the quality bar (maximise
+elements, high-fidelity original art, real photos only when they add, one cohesive world, deep
+~10-min read, full-page mode). A full-page microsite is a whole *story* (shown on its share link),
+not a reusable gallery block — the gallery holds discrete elements only.
+
 Beyond assets, StoryKit hosts whole **interactive visual essays and digests that YOU author**.
 You do the research and write the StorySpec JSON (data only — **never HTML/JS/CSS/SVG**; raw-code
 fields are stripped server-side); the platform designs, themes, hosts and shares the page. Nothing
