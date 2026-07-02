@@ -225,6 +225,21 @@ runs on the user's machine.
      fonts, chart skins and svg scenes, so the page could belong to no other story.
    - **Ground it in real things.** Draw the actual object, annotate a real image, build the specific
      tool. Charts are supporting evidence, not the main event.
+   - **FULL-PAGE ESSAY MODE (max freedom, zero template).** For a truly bespoke, pudding.cool-style
+     piece, make the ENTIRE story ONE block and design the whole page yourself:
+
+     ```json
+     {"type":"microsite","fullPage":true,
+      "asset":{"name":"…","description":"…","tags":["…"],"summary":"…"},
+      "interactive":{"html":"…","css":"…","js":"…","libs":["scrollama","d3"]}}
+     ```
+
+     No StoryKit hero/section/prose chrome is applied at all — you control layout, typography,
+     structure, scroll behaviour and animation. It renders edge-to-edge at full viewport height and
+     scrolls INTERNALLY, so `scrollama` scrollytelling, sticky stages, `enter-view` reveals and `d3`
+     all work normally. Budgets are large (html ~60KB, css ~40KB, js ~90KB); the `libs[]` toolkit is
+     host-injected and ready as globals. Same sandbox safety (no network/eval/storage/parent APIs).
+     Use this so two of your stories look like the work of two different designers.
    - **Pro libraries.** A custom `interactive` widget may add `"libs":[...]` beside `html/css/js`
      with any of `d3`, `lodash`, `nouislider`, `d3-annotation`, `enter-view`, `scrollama`, `moveto`,
      `topojson` — the exact toolkit pudding.cool builds with. They're injected into the sandbox from
