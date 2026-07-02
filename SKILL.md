@@ -211,6 +211,11 @@ runs on the user's machine.
    `theme.edition` ∈ {magazine, broadsheet, notebook, terminal, zine, gallery}. Vary text
    placement, break the frame with full-bleed moments, and don't open every story with a dropcap.
 
+   **Go long by default.** Unless the user asked for something short, aim for a **deep ~10-minute
+   read** — roughly 1,900–2,600 words of prose across many sections, plus the visual/interactive
+   spine (hook → context → several distinct angles → a turn → pay-off → reflection). A thin
+   400–800-word essay reads as a stub. In full-page essay mode, build a long scroll journey.
+
    **Build at pudding.cool scale.** The bar is their visual essays — dense, full-viewport, one
    cohesive visual world per story, carried by bespoke illustration and interaction (not a stack of
    default charts). Concretely:
