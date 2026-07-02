@@ -211,6 +211,27 @@ runs on the user's machine.
    `theme.edition` ∈ {magazine, broadsheet, notebook, terminal, zine, gallery}. Vary text
    placement, break the frame with full-bleed moments, and don't open every story with a dropcap.
 
+   **Build at pudding.cool scale.** The bar is their visual essays — dense, full-viewport, one
+   cohesive visual world per story, carried by bespoke illustration and interaction (not a stack of
+   default charts). Concretely:
+
+   - **Fill the viewport.** Every showpiece/scene/interactive should be full-bleed
+     (`"layout":{"span":"bleed"}`) and big enough to own the screen. Keep prose terse — the visuals
+     carry the story. Never leave a screen of near-empty background.
+   - **One signature element.** Build the story around a single bespoke interactive that *is* the
+     thesis (the pockets phone-drop; a slider that dives to the sea floor).
+   - **One cohesive aesthetic.** Commit to a single visual world and carry it through every block —
+     aged paper + watercolour, a pixel/terminal grid, a hand-built illustration — matched colours,
+     fonts, chart skins and svg scenes, so the page could belong to no other story.
+   - **Ground it in real things.** Draw the actual object, annotate a real image, build the specific
+     tool. Charts are supporting evidence, not the main event.
+   - **Pro libraries.** A custom `interactive` widget may add `"libs":[...]` beside `html/css/js`
+     with any of `d3`, `lodash`, `nouislider`, `d3-annotation`, `enter-view`, `scrollama`, `moveto`,
+     `topojson` — the exact toolkit pudding.cool builds with. They're injected into the sandbox from
+     a pinned CDN and ready as globals (`d3`, `_`, `noUiSlider`, `d3.annotation`, `enterView`,
+     `scrollama`, `MoveTo`) before your script runs. Use them for force graphs, zoomable scatters,
+     annotated charts — real data-viz, not static SVG.
+
 3. **Show the user BOTH links from the response:**
    - `shareUrl` — the story, private, reachable only by this link
    - `claimUrl` — open it and sign in at storykit.space to KEEP the story (unclaimed private
