@@ -193,6 +193,24 @@ runs on the user's machine.
    the reviewed asset library). Pass your research as `sources` — it renders as themed citations.
    Use `"format":"digest"` for a prose-led briefing.
 
+   **Give each story a different SHAPE.** Do not reach for the same hero → titled sections →
+   prose + chart template every time — that's why generated essays start to look identical. Pick a
+   `theme.format` that fits the topic and let it drive the skeleton, then a `theme.edition` for the skin:
+
+   | `theme.format` | when | what the page becomes |
+   |---|---|---|
+   | `scrolly-narrative` | a process / how-it-works / journey | sticky scrollytelling backbone (use `scrolly` blocks) |
+   | `explorer` | a database / map / "find yours" tool | lead with the interactive; it's the anchor |
+   | `refinement` | "which is best / vs" | ranked, wide side-by-side comparisons |
+   | `long-read` | essay, history, reflection | narrow reading column, small inline visuals |
+   | `quiz-journey` | guess-then-reveal | `guess`/`quiz` beats with breathing room |
+   | `gallery` | image / scene led | every visual full-bleed edge-to-edge |
+   | `dispatch` | data briefing / report | ruled section filings, compact charts |
+   | `magazine` | mixed feature (default) | only when nothing above fits better |
+
+   `theme.edition` ∈ {magazine, broadsheet, notebook, terminal, zine, gallery}. Vary text
+   placement, break the frame with full-bleed moments, and don't open every story with a dropcap.
+
 3. **Show the user BOTH links from the response:**
    - `shareUrl` — the story, private, reachable only by this link
    - `claimUrl` — open it and sign in at storykit.space to KEEP the story (unclaimed private

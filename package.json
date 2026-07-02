@@ -1,7 +1,7 @@
 {
   "name": "storykit-assets-skill",
-  "version": "0.4.0",
-  "description": "Agent skill for the free StoryKit design library (embed charts/widgets/themes with your data + colors) and BYOM visual essays \u2014 your model authors, StoryKit designs, hosts and shares. No key needed.",
+  "version": "0.5.0",
+  "description": "Agent skill for the free StoryKit design library (embed charts/widgets/themes with your data + colors) and BYOM visual essays — your model authors, StoryKit designs, hosts and shares. No key needed.",
   "license": "MIT",
   "author": "aryan0078 (https://storykit.space)",
   "type": "module",
