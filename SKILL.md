@@ -168,15 +168,15 @@ StoryKit also ships as an MCP server — remote (streamable HTTP, no install) at
 
 ## Create stories on storykit.space (BYOM — no key, no signup)
 
-> **GOLDEN RULE — the story lives on the StoryKit platform: you author it and publish it via
-> `import_story`; StoryKit hosts and renders it.** **Never build a separate standalone app or website**
-> (no React/Next/Vue/Svelte, no JSX, no npm/imports/bundlers, no build step, no tailwind/lucide) — that
-> is wasted work the platform can't use. For the **best** result, author ONE bespoke, self-contained
-> **full-page microsite** in plain HTML + CSS + **vanilla JS** — a single beautiful pudding.cool-style
-> page. This is the **premium path, encouraged** — it's what makes the great BYOM stories great. For
-> simpler pieces you may instead compose **StorySpec data blocks**. Either way, **reuse** the reviewed
-> library (`libraryWidget` / existing assets) when a fitting visual exists. Keep all code **vanilla and
-> self-contained** — the sandbox runs plain html/css/js, never a framework.
+> **GOLDEN RULE — write the whole story as a bespoke, self-contained full-page microsite (HTML + CSS +
+> JS) and publish it via `import_story`; StoryKit hosts and renders it.** You have **full creative
+> freedom** over the entire page — layout, typography, sections, scroll, animation, bespoke SVG scenes,
+> interactive visuals — and may write as much code as the story needs (budgets: html ~60KB, css ~40KB,
+> js ~90KB). **Writing the page yourself is encouraged** — it's the best path and what makes the great
+> BYOM stories (like the Kaldi ledger) great. It runs in a self-contained browser sandbox: plain browser
+> JS + the host-injected libs toolkit (d3, scrollama, enter-view, d3-annotation, nouislider, moveto,
+> lodash, topojson) — so no build step / JSX / npm, and no external network/eval/storage. (For a simpler
+> piece you may compose **StorySpec data blocks** instead; reuse library widgets when a visual fits.)
 
 **Just give it a topic.** When someone says "make a StoryKit essay about X", YOU do the research and
 author the story to the standard below, then `import_story` it.
@@ -187,11 +187,11 @@ author the story to the standard below, then `import_story` it.
 2. **Design plan** — decide (a) ONE aesthetic world drawn from the subject (colours + fonts + a
    signature visual), and (b) the structure the subject asks for.
 3. **Build**:
-   - **Premium (preferred for a distinctive piece):** author ONE bespoke **full-page microsite** —
-     plain HTML + CSS + vanilla JS, a single self-contained page — dense with subject-specific visuals
-     (SVG scenes, maps, cutaways, charts, unit grids), every section carried by a visual, not prose.
-     NO React/JSX/frameworks/imports. Pull in the libs toolkit (d3, scrollama, enter-view, …) via
-     `interactive.libs[]` for real data-viz.
+   - **Preferred — write a bespoke full-page microsite:** author the whole page in HTML + CSS + JS,
+     a single self-contained page, dense with subject-specific visuals (SVG scenes, maps, cutaways,
+     charts, unit grids), every section carried by a visual, not prose. Write freely and richly. It runs
+     in a browser sandbox (plain JS, no build/JSX); pull in the libs toolkit (d3, scrollama, enter-view,
+     …) via `interactive.libs[]` for real data-viz.
    - **Simpler pieces:** compose rich StorySpec **data blocks** + `libraryWidget` reuse (charts,
      timelines, scrolly, comparisons, stats, scenes), with a subject-drawn `theme`.
    Reuse the reviewed library when a fitting visual already exists.
@@ -270,10 +270,12 @@ runs on the user's machine.
    `theme.edition` ∈ {magazine, broadsheet, notebook, terminal, zine, gallery}. Vary text
    placement, break the frame with full-bleed moments, and don't open every story with a dropcap.
 
-   **Go long by default.** Unless the user asked for something short, aim for a **deep ~10-minute
-   read** — roughly 1,900–2,600 words of prose across many sections, plus the visual/interactive
-   spine (hook → context → several distinct angles → a turn → pay-off → reflection). A thin
-   400–800-word essay reads as a stub. In full-page essay mode, build a long scroll journey.
+   **Go deep through VISUALS, not words — text is ~20–30% max.** Build a substantial, many-section
+   journey (hook → context → several angles → a turn → pay-off), but keep prose **lean** — short
+   captions and terse lines, roughly 20–30% of the page. The story must be **carried by visual
+   elements** (SVG scenes, diagrams, charts, maps, animations), not paragraphs. Depth comes from the
+   number and quality of visual stages, not word count — always favour one more element over one more
+   paragraph, and never pad with walls of text.
 
    **Build at pudding.cool scale.** The bar is their visual essays — dense, full-viewport, one
    cohesive visual world per story, carried by bespoke illustration and interaction (not a stack of
