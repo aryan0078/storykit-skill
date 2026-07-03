@@ -198,6 +198,17 @@ author the story to the standard below, then `import_story` it.
 4. **Self-critique** — would a reader screenshot this? Is each section carried by its visual, not
    text? Is it mobile-legible? Fix, then import.
 
+**Default = creative, not cinematic.** When the user doesn't specify a style, invent a fresh,
+colourful, subject-driven design — don't default to a dark cinematic look.
+
+**Book-length input** (a whole book / 100+ pages): build a **paginated** reader — a page-turn /
+chaptered microsite that shows one section at a time (prev/next, chapter nav), or split into many
+blocks — never one continuous 100-page scroll (it breaks the layout).
+
+**Editing a story** the user already made (with their API key): call `get_story_content` (id) to fetch
+its current title/subtitle/theme/blocks, change what they asked, then `update_story` (same id) — the
+share link stays the same.
+
 ### Pattern catalog — COMPOSE from these, don't reinvent (arrange them freshly per story)
 
 Fetch ready-to-use code: `curl -s https://asset.storykit.space/api/v1/patterns?brief=true` to list
