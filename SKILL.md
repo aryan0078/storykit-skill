@@ -168,36 +168,33 @@ StoryKit also ships as an MCP server — remote (streamable HTTP, no install) at
 
 ## Create stories on storykit.space (BYOM — no key, no signup)
 
-> **GOLDEN RULE — you author DATA; the platform designs, publishes and renders it.** StoryKit hosts
-> the story and does ALL the visual design, layout, theming and rendering. **Do NOT write HTML, CSS, JS
-> or React, and never build your own webpage/app** — that is wasted work the platform discards. You
-> author the story as **StorySpec DATA blocks**; the platform turns them into a polished, interactive,
-> on-brand page. **Reuse** the reviewed component library (`libraryWidget` requests / existing assets)
-> when a fitting visual already exists — reuse when it helps, though not for everything. A hand-authored
-> full-page `microsite` (html/css/js) is a **rare last resort**, never the default.
+> **GOLDEN RULE — the story lives on the StoryKit platform: you author it and publish it via
+> `import_story`; StoryKit hosts and renders it.** **Never build a separate standalone app or website**
+> (no React/Next/Vue/Svelte, no JSX, no npm/imports/bundlers, no build step, no tailwind/lucide) — that
+> is wasted work the platform can't use. For the **best** result, author ONE bespoke, self-contained
+> **full-page microsite** in plain HTML + CSS + **vanilla JS** — a single beautiful pudding.cool-style
+> page. This is the **premium path, encouraged** — it's what makes the great BYOM stories great. For
+> simpler pieces you may instead compose **StorySpec data blocks**. Either way, **reuse** the reviewed
+> library (`libraryWidget` / existing assets) when a fitting visual exists. Keep all code **vanilla and
+> self-contained** — the sandbox runs plain html/css/js, never a framework.
 
 **Just give it a topic.** When someone says "make a StoryKit essay about X", YOU do the research and
-author the StorySpec DATA blocks to the standard below, then import it.
+author the story to the standard below, then `import_story` it.
 
-### The process (do this every time — you author data, the platform designs it)
+### The process (do this every time — publish on StoryKit, never a separate app)
 
 1. **Angle** — reframe the topic as a question with a hook or one human datapoint.
-2. **Design plan** — decide: (a) ONE aesthetic world drawn from the subject (theme colours + fonts);
-   (b) **the STORY FORMAT the subject asks for** — never default to one shape:
-   - `scrolly-narrative` — one scrolly block as the spine (a sticky graphic that transforms as steps scroll). RIGHT for a process / journey.
-   - `explorer` — lead with ONE big interactive that IS the story; prose only annotates it.
-   - `refinement` — the same interactive/metric refined several times (a comparative tool).
-   - `long-read` — prose-led, sparse figures, a text-only stretch to reset pace.
-   - `quiz-journey` — a guess/poll/quiz before each reveal.
-   - `gallery` — a sequence of full-bleed showpiece scenes, sparse text.
-   - `dispatch` — a dense wire report: lead with numbers, terse prose, packed charts.
-
-   Then (c) for each section: its single point + its ONE strong visual (a standard block or a **reused
-   library widget**).
-3. **Author the DATA blocks** for that plan — vary the beat section to section; give every section a
-   visual via **standard blocks + `libraryWidget` reuse** (charts, timelines, scrolly, comparisons,
-   stats, scenes); prose is the caption, not the content. **Do NOT write code** — set a subject-drawn
-   `theme` and let the platform's design engine make it distinctive.
+2. **Design plan** — decide (a) ONE aesthetic world drawn from the subject (colours + fonts + a
+   signature visual), and (b) the structure the subject asks for.
+3. **Build**:
+   - **Premium (preferred for a distinctive piece):** author ONE bespoke **full-page microsite** —
+     plain HTML + CSS + vanilla JS, a single self-contained page — dense with subject-specific visuals
+     (SVG scenes, maps, cutaways, charts, unit grids), every section carried by a visual, not prose.
+     NO React/JSX/frameworks/imports. Pull in the libs toolkit (d3, scrollama, enter-view, …) via
+     `interactive.libs[]` for real data-viz.
+   - **Simpler pieces:** compose rich StorySpec **data blocks** + `libraryWidget` reuse (charts,
+     timelines, scrolly, comparisons, stats, scenes), with a subject-drawn `theme`.
+   Reuse the reviewed library when a fitting visual already exists.
 4. **Self-critique** — would a reader screenshot this? Is each section carried by its visual, not
    text? Is it mobile-legible? Fix, then import.
 
