@@ -209,9 +209,12 @@ colourful, subject-driven design — don't default to a dark cinematic look.
 chaptered microsite that shows one section at a time (prev/next, chapter nav), or split into many
 blocks — never one continuous 100-page scroll (it breaks the layout).
 
-**Editing a story** the user already made (with their API key): call `get_story_content` (id) to fetch
-its current title/subtitle/theme/blocks, change what they asked, then `update_story` (same id) — the
-share link stays the same.
+**Editing vs. creating — don't duplicate.** If the user asks to **change / edit / modify / fix / redo /
+tweak / update** a story that already exists (they refer to "the story", give a link or id, or continue a
+previous one), you **must edit it in place** — do NOT create/import a new one (a second story when they
+wanted one changed is a mistake). With their API key: call `get_story_content` (id) to fetch its current
+title/subtitle/theme/blocks, change **only** what they asked, then `update_story` (same id) — the share
+link stays the same. Only create a new story when the user clearly wants a NEW, separate one.
 
 ### Pattern catalog — COMPOSE from these, don't reinvent (arrange them freshly per story)
 
