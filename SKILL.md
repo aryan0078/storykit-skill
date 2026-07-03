@@ -170,7 +170,40 @@ StoryKit also ships as an MCP server — remote (streamable HTTP, no install) at
 
 **Just give it a topic.** When someone says "make a StoryKit essay about X", that's the whole
 brief — YOU do the research and author the full StorySpec (or a bespoke full-page microsite) to the
-standard below, then import it. Read the live contract first; it encodes the quality bar (maximise
+standard below, then import it.
+
+### The process (do this every time — message-first, like pudding.cool)
+
+1. **Angle** — reframe the topic as a question with a sledgehammer hook or one human datapoint.
+2. **Design plan (BEFORE any code)** — decide in your head/notes: (a) ONE aesthetic world drawn
+   from the subject; (b) the structural MODE — `scrolly` (a sticky graphic that transforms as steps
+   scroll — the strongest), `stacked` (one point → one visual per section), or `stepper` (tap
+   through); (c) for EACH section: its single point + its ONE signature visual + the interaction.
+   Every section must hook; if a section has no visual reason to exist, cut it.
+3. **Build** the bespoke full-page microsite from that plan (html/css/js + the libs toolkit).
+4. **Self-critique** — would a reader screenshot this? Is each section carried by its visual, not
+   text? Is it mobile-legible? Fix, then import.
+
+### Pattern catalog — COMPOSE from these, don't reinvent (arrange them freshly per story)
+
+- **Scrollytelling spine** — one sticky full-viewport visual (canvas/SVG) driven by scroll progress
+  that TRANSFORMS through stages (e.g. a periodic table → an atom → a reactor). Terse caption steps.
+- **Transform-on-scroll** — an object morphs/zooms/assembles as you scroll.
+- **Interactive control** — a `noUiSlider`/button that drives a live sim (chain reaction, boids,
+  orbit, flock) on a canvas; live readout of state.
+- **Annotated chart** — `d3` + `d3-annotation`, callouts drawn ON the graphic.
+- **Unit / waffle / dot grid** — thousands of marks that rearrange to make a proportion visceral.
+- **Reveal illusion / before-after** — show the trick, then a button reveals the truth.
+- **Stepper** — tap/scroll through discrete states (predict → reveal).
+- **Bespoke scene / sketch-ink** — original illustrated SVG in one cohesive style (ink-on-paper
+  with a rough filter, pixel-art, watercolour), animated.
+- **Real photo (only when it earns it)** — public-domain imagery (NASA/Wikimedia), always credited.
+
+### Never rhyme two stories in a row
+
+Vary all THREE at once from your recent pieces: **structure** (mode/skeleton), **aesthetic**
+(subject world + palette family + type), and **elements** (which patterns). If the last story was a
+dark scrolly with a canvas sim, the next must differ on structure AND aesthetic AND element type. Read the live contract first; it encodes the quality bar (maximise
 elements, high-fidelity original art, real photos only when they add, one cohesive world, deep
 ~10-min read, full-page mode). A full-page microsite is a whole *story* (shown on its share link),
 not a reusable gallery block — the gallery holds discrete elements only.
