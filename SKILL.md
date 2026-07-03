@@ -205,6 +205,11 @@ author the story to the standard below, then `import_story` it.
 **Default = creative, not cinematic.** When the user doesn't specify a style, invent a fresh,
 colourful, subject-driven design — don't default to a dark cinematic look.
 
+**No emoji.** This is premium editorial, not a chat message. Don't sprinkle emojis (🚀✨🔥📈🎯) into
+headings, kickers, labels, buttons, captions or body — they cheapen the design and read as AI slop.
+For emphasis and icons use real typography (weight, size, small-caps), drawn SVG marks, rules and
+colour. The only exception is when a glyph literally IS the subject; otherwise zero.
+
 **Book-length input** (a whole book / 100+ pages): build a **paginated** reader — a page-turn /
 chaptered microsite that shows one section at a time (prev/next, chapter nav), or split into many
 blocks — never one continuous 100-page scroll (it breaks the layout).
