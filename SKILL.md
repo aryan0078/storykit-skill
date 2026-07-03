@@ -176,11 +176,22 @@ standard below, then import it.
 
 1. **Angle** — reframe the topic as a question with a sledgehammer hook or one human datapoint.
 2. **Design plan (BEFORE any code)** — decide in your head/notes: (a) ONE aesthetic world drawn
-   from the subject; (b) the structural MODE — `scrolly` (a sticky graphic that transforms as steps
-   scroll — the strongest), `stacked` (one point → one visual per section), or `stepper` (tap
-   through); (c) for EACH section: its single point + its ONE signature visual + the interaction.
-   Every section must hook; if a section has no visual reason to exist, cut it.
-3. **Build** the bespoke full-page microsite from that plan (html/css/js + the libs toolkit).
+   from the subject; (b) **the PRESENTATION MODE THE SUBJECT ASKS FOR** — don't default to scrolling.
+   The medium is part of the story:
+   - `page-turn` — turn discrete pages (arrow keys / on-screen buttons / click page-edge / swipe, with
+     a real turn animation). RIGHT for a **diary, letters, a logbook, a dossier, a picture-book, a case file, a chaptered narrative**.
+   - `scroll-scale` — one continuous scroll that travels a huge quantity/size/distance/time so the scale is *felt*. RIGHT for "how big / how many / how far / how long".
+   - `stepper` — tap Next through discrete states. RIGHT for a **process / algorithm / recipe / decision**.
+   - `scrolly` — a sticky graphic that transforms as captions scroll. RIGHT for **one dominant progression** (a chart morphs, an object assembles).
+   - `timeline` — events along an axis the reader moves through. RIGHT for a **chronology**.
+   - `stacked` — distinct full-viewport chapters. The safe fallback only when none above fit.
+
+   The interaction must fit the subject's real object — **a diary is _turned_, not scrolled.** Then
+   (c) for EACH page/section: its single point + its ONE signature visual + the interaction. Every
+   page must hook; if a page has no visual reason to exist, cut it.
+3. **Build** the bespoke full-page microsite from that plan (html/css/js + the libs toolkit). **Maximise
+   bespoke visuals** — every page/section earns at least one strong subject-specific graphic (SVG
+   scenes, maps, cutaways, charts, unit grids, portraits-as-ink); prose is the caption, not the content.
 4. **Self-critique** — would a reader screenshot this? Is each section carried by its visual, not
    text? Is it mobile-legible? Fix, then import.
 
