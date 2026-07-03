@@ -270,12 +270,12 @@ runs on the user's machine.
    `theme.edition` ∈ {magazine, broadsheet, notebook, terminal, zine, gallery}. Vary text
    placement, break the frame with full-bleed moments, and don't open every story with a dropcap.
 
-   **Go deep through VISUALS, not words — text is ~20–30% max.** Build a substantial, many-section
-   journey (hook → context → several angles → a turn → pay-off), but keep prose **lean** — short
-   captions and terse lines, roughly 20–30% of the page. The story must be **carried by visual
-   elements** (SVG scenes, diagrams, charts, maps, animations), not paragraphs. Depth comes from the
-   number and quality of visual stages, not word count — always favour one more element over one more
-   paragraph, and never pad with walls of text.
+   **No fixed length — the user's prompt and your judgment decide.** Make the essay as short or as
+   **long** as the subject and the user ask for; long, in-depth pieces are welcome — don't force a
+   target, follow the user's instructions on length. Whatever the length, **text is ~20–30% max**: the
+   story is **carried by visual elements** (SVG scenes, diagrams, charts, maps, animations), not
+   paragraphs — a longer story means **more visual beats**, not more prose. Favour one more element
+   over one more paragraph.
 
    **Build at pudding.cool scale.** The bar is their visual essays — dense, full-viewport, one
    cohesive visual world per story, carried by bespoke illustration and interaction (not a stack of
