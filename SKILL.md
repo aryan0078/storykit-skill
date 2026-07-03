@@ -323,9 +323,13 @@ runs on the user's machine.
      scrolls INTERNALLY, so `gsap`+`ScrollTrigger` timelines, `scrollama` scrollytelling, sticky
      stages, `enter-view` reveals and `d3` all work normally. Budgets are large (html ~60KB, css
      ~40KB, js ~90KB); the `libs[]` toolkit is host-injected and ready as globals. Same sandbox safety
-     (no network/eval/storage/parent APIs). **Bring it to life with motion** — a page that animates on
-     scroll reads as alive, not dead. Use this so two of your stories look like the work of two
-     different designers.
+     (no network/eval/storage/parent APIs). **WYSIWYG:** StoryKit renders your html/css/js EXACTLY as
+     written — there is **no CSS framework (Tailwind/Bootstrap) or React/JSX** preloaded, so ship real
+     CSS + vanilla JS (or the `libs[]`). If you previewed with a framework, inline the equivalent real
+     CSS so the published page matches what you saw (a page that assumes utility classes it never
+     shipped collapses/overlaps). **Bring it to life with motion** — a page that animates on scroll
+     reads as alive, not dead. Use this so two of your stories look like the work of two different
+     designers.
    - **Pro libraries.** A custom `interactive` widget may add `"libs":[...]` beside `html/css/js`
      with any of `d3`, `lodash`, `nouislider`, `d3-annotation`, `enter-view`, `scrollama`, `moveto`,
      `topojson` — a small pinned pro toolkit. They're injected into the sandbox from
