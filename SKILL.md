@@ -168,30 +168,36 @@ StoryKit also ships as an MCP server — remote (streamable HTTP, no install) at
 
 ## Create stories on storykit.space (BYOM — no key, no signup)
 
-**Just give it a topic.** When someone says "make a StoryKit essay about X", that's the whole
-brief — YOU do the research and author the full StorySpec (or a bespoke full-page microsite) to the
-standard below, then import it.
+> **GOLDEN RULE — you author DATA; the platform designs, publishes and renders it.** StoryKit hosts
+> the story and does ALL the visual design, layout, theming and rendering. **Do NOT write HTML, CSS, JS
+> or React, and never build your own webpage/app** — that is wasted work the platform discards. You
+> author the story as **StorySpec DATA blocks**; the platform turns them into a polished, interactive,
+> on-brand page. **Reuse** the reviewed component library (`libraryWidget` requests / existing assets)
+> when a fitting visual already exists — reuse when it helps, though not for everything. A hand-authored
+> full-page `microsite` (html/css/js) is a **rare last resort**, never the default.
 
-### The process (do this every time — message-first, like pudding.cool)
+**Just give it a topic.** When someone says "make a StoryKit essay about X", YOU do the research and
+author the StorySpec DATA blocks to the standard below, then import it.
 
-1. **Angle** — reframe the topic as a question with a sledgehammer hook or one human datapoint.
-2. **Design plan (BEFORE any code)** — decide in your head/notes: (a) ONE aesthetic world drawn
-   from the subject; (b) **the PRESENTATION MODE THE SUBJECT ASKS FOR** — don't default to scrolling.
-   The medium is part of the story:
-   - `page-turn` — turn discrete pages (arrow keys / on-screen buttons / click page-edge / swipe, with
-     a real turn animation). RIGHT for a **diary, letters, a logbook, a dossier, a picture-book, a case file, a chaptered narrative**.
-   - `scroll-scale` — one continuous scroll that travels a huge quantity/size/distance/time so the scale is *felt*. RIGHT for "how big / how many / how far / how long".
-   - `stepper` — tap Next through discrete states. RIGHT for a **process / algorithm / recipe / decision**.
-   - `scrolly` — a sticky graphic that transforms as captions scroll. RIGHT for **one dominant progression** (a chart morphs, an object assembles).
-   - `timeline` — events along an axis the reader moves through. RIGHT for a **chronology**.
-   - `stacked` — distinct full-viewport chapters. The safe fallback only when none above fit.
+### The process (do this every time — you author data, the platform designs it)
 
-   The interaction must fit the subject's real object — **a diary is _turned_, not scrolled.** Then
-   (c) for EACH page/section: its single point + its ONE signature visual + the interaction. Every
-   page must hook; if a page has no visual reason to exist, cut it.
-3. **Build** the bespoke full-page microsite from that plan (html/css/js + the libs toolkit). **Maximise
-   bespoke visuals** — every page/section earns at least one strong subject-specific graphic (SVG
-   scenes, maps, cutaways, charts, unit grids, portraits-as-ink); prose is the caption, not the content.
+1. **Angle** — reframe the topic as a question with a hook or one human datapoint.
+2. **Design plan** — decide: (a) ONE aesthetic world drawn from the subject (theme colours + fonts);
+   (b) **the STORY FORMAT the subject asks for** — never default to one shape:
+   - `scrolly-narrative` — one scrolly block as the spine (a sticky graphic that transforms as steps scroll). RIGHT for a process / journey.
+   - `explorer` — lead with ONE big interactive that IS the story; prose only annotates it.
+   - `refinement` — the same interactive/metric refined several times (a comparative tool).
+   - `long-read` — prose-led, sparse figures, a text-only stretch to reset pace.
+   - `quiz-journey` — a guess/poll/quiz before each reveal.
+   - `gallery` — a sequence of full-bleed showpiece scenes, sparse text.
+   - `dispatch` — a dense wire report: lead with numbers, terse prose, packed charts.
+
+   Then (c) for each section: its single point + its ONE strong visual (a standard block or a **reused
+   library widget**).
+3. **Author the DATA blocks** for that plan — vary the beat section to section; give every section a
+   visual via **standard blocks + `libraryWidget` reuse** (charts, timelines, scrolly, comparisons,
+   stats, scenes); prose is the caption, not the content. **Do NOT write code** — set a subject-drawn
+   `theme` and let the platform's design engine make it distinctive.
 4. **Self-critique** — would a reader screenshot this? Is each section carried by its visual, not
    text? Is it mobile-legible? Fix, then import.
 
