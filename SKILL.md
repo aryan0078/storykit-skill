@@ -174,8 +174,9 @@ StoryKit also ships as an MCP server — remote (streamable HTTP, no install) at
 > interactive visuals — and may write as much code as the story needs (budgets: html ~60KB, css ~40KB,
 > js ~90KB). **Writing the page yourself is encouraged** — it's the best path and what makes the great
 > BYOM stories (like the Kaldi ledger) great. It runs in a self-contained browser sandbox: plain browser
-> JS + the host-injected libs toolkit (d3, scrollama, enter-view, d3-annotation, nouislider, moveto,
-> lodash, topojson) — so no build step / JSX / npm, and no external network/eval/storage. (For a simpler
+> JS + the host-injected libs toolkit (gsap + scrolltrigger for high-quality animation, d3, scrollama,
+> enter-view, d3-annotation, nouislider, moveto, lodash, topojson) — so no build step / JSX / npm, and
+> no external network/eval/storage. (For a simpler
 > piece you may compose **StorySpec data blocks** instead; reuse library widgets when a visual fits.)
 
 **Just give it a topic.** When someone says "make a StoryKit essay about X", YOU do the research and
@@ -190,8 +191,11 @@ author the story to the standard below, then `import_story` it.
    - **Preferred — write a bespoke full-page microsite:** author the whole page in HTML + CSS + JS,
      a single self-contained page, dense with subject-specific visuals (SVG scenes, maps, cutaways,
      charts, unit grids), every section carried by a visual, not prose. Write freely and richly. It runs
-     in a browser sandbox (plain JS, no build/JSX); pull in the libs toolkit (d3, scrollama, enter-view,
-     …) via `interactive.libs[]` for real data-viz.
+     in a browser sandbox (plain JS, no build/JSX); pull in the libs toolkit via `interactive.libs[]` —
+     `gsap`+`scrolltrigger` for animation, `d3`/`scrollama`/… for data-viz. **Make it feel ALIVE, not
+     dead:** use scroll-driven reveals, GSAP timelines that assemble a diagram as the reader scrolls, and
+     hover/tap micro-interactions where they serve the content. Reference libs as globals (`gsap`,
+     `ScrollTrigger`, `d3`, …); never add your own `<script>` tag — reduced-motion is respected for you.
    - **Simpler pieces:** compose rich StorySpec **data blocks** + `libraryWidget` reuse (charts,
      timelines, scrolly, comparisons, stats, scenes), with a subject-drawn `theme`.
    Reuse the reviewed library when a fitting visual already exists.
@@ -222,6 +226,9 @@ wire in your real data/colours, combine several — adapt every one, never ship 
 - **Interactive control** — a `noUiSlider`/button that drives a live sim (chain reaction, boids,
   orbit, flock) on a canvas; live readout of state.
 - **Annotated chart** — `d3` + `d3-annotation`, callouts drawn ON the graphic.
+- **Living animation** — a `gsap` + `ScrollTrigger` timeline that plays as the reader scrolls (a
+  machine assembles, a number counts up, elements enter in sequence) so the page breathes instead of
+  sitting static; pin a scene and scrub its timeline, or reveal each section on entry.
 - **Unit / waffle / dot grid** — thousands of marks that rearrange to make a proportion visceral.
 - **Reveal illusion / before-after** — show the trick, then a button reveals the truth.
 - **Stepper** — tap/scroll through discrete states (predict → reveal).
@@ -288,9 +295,9 @@ runs on the user's machine.
    paragraphs — a longer story means **more visual beats**, not more prose. Favour one more element
    over one more paragraph.
 
-   **Build at pudding.cool scale.** The bar is their visual essays — dense, full-viewport, one
-   cohesive visual world per story, carried by bespoke illustration and interaction (not a stack of
-   default charts). Concretely:
+   **Build at award-winning visual-essay scale.** The bar is the best interactive editorial on the
+   web — dense, full-viewport, one cohesive visual world per story, carried by bespoke illustration
+   and interaction (not a stack of default charts). Concretely:
 
    - **Fill the viewport.** Every showpiece/scene/interactive should be full-bleed
      (`"layout":{"span":"bleed"}`) and big enough to own the screen. Keep prose terse — the visuals
@@ -302,24 +309,26 @@ runs on the user's machine.
      fonts, chart skins and svg scenes, so the page could belong to no other story.
    - **Ground it in real things.** Draw the actual object, annotate a real image, build the specific
      tool. Charts are supporting evidence, not the main event.
-   - **FULL-PAGE ESSAY MODE (max freedom, zero template).** For a truly bespoke, pudding.cool-style
+   - **FULL-PAGE ESSAY MODE (max freedom, zero template).** For a truly bespoke, editorial-grade
      piece, make the ENTIRE story ONE block and design the whole page yourself:
 
      ```json
      {"type":"microsite","fullPage":true,
       "asset":{"name":"…","description":"…","tags":["…"],"summary":"…"},
-      "interactive":{"html":"…","css":"…","js":"…","libs":["scrollama","d3"]}}
+      "interactive":{"html":"…","css":"…","js":"…","libs":["gsap","scrolltrigger","scrollama","d3"]}}
      ```
 
      No StoryKit hero/section/prose chrome is applied at all — you control layout, typography,
      structure, scroll behaviour and animation. It renders edge-to-edge at full viewport height and
-     scrolls INTERNALLY, so `scrollama` scrollytelling, sticky stages, `enter-view` reveals and `d3`
-     all work normally. Budgets are large (html ~60KB, css ~40KB, js ~90KB); the `libs[]` toolkit is
-     host-injected and ready as globals. Same sandbox safety (no network/eval/storage/parent APIs).
-     Use this so two of your stories look like the work of two different designers.
+     scrolls INTERNALLY, so `gsap`+`ScrollTrigger` timelines, `scrollama` scrollytelling, sticky
+     stages, `enter-view` reveals and `d3` all work normally. Budgets are large (html ~60KB, css
+     ~40KB, js ~90KB); the `libs[]` toolkit is host-injected and ready as globals. Same sandbox safety
+     (no network/eval/storage/parent APIs). **Bring it to life with motion** — a page that animates on
+     scroll reads as alive, not dead. Use this so two of your stories look like the work of two
+     different designers.
    - **Pro libraries.** A custom `interactive` widget may add `"libs":[...]` beside `html/css/js`
      with any of `d3`, `lodash`, `nouislider`, `d3-annotation`, `enter-view`, `scrollama`, `moveto`,
-     `topojson` — the exact toolkit pudding.cool builds with. They're injected into the sandbox from
+     `topojson` — a small pinned pro toolkit. They're injected into the sandbox from
      a pinned CDN and ready as globals (`d3`, `_`, `noUiSlider`, `d3.annotation`, `enterView`,
      `scrollama`, `MoveTo`) before your script runs. Use them for force graphs, zoomable scatters,
      annotated charts — real data-viz, not static SVG.
