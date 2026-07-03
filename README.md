@@ -8,8 +8,8 @@ whole interactive visual essays that StoryKit designs, hosts and shares. No key,
 _Created with love by Story Kit._ 🍮
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/aryan0078/storykit-skill/main/assets/asset-3174.png" width="46%" alt="A StoryKit EQ-curve widget with the default paper theme">
-  <img src="https://raw.githubusercontent.com/aryan0078/storykit-skill/main/assets/asset-themed.png" width="46%" alt="The same widget re-inked gold on dark via URL theme params">
+  <img src="https://raw.githubusercontent.com/aryan0078/storykit-skill/master/assets/asset-3174.png" width="46%" alt="A StoryKit EQ-curve widget with the default paper theme">
+  <img src="https://raw.githubusercontent.com/aryan0078/storykit-skill/master/assets/asset-themed.png" width="46%" alt="The same widget re-inked gold on dark via URL theme params">
 </p>
 <p align="center"><em>One live asset, two pages — re-inked with URL params, zero CSS written.</em></p>
 
@@ -54,8 +54,8 @@ Any agent that reads Markdown skill/instruction files can use it.
 ```
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/aryan0078/storykit-skill/main/assets/asset-knob.png" width="46%" alt="A drag-interactable rotary knob widget from the library">
-  <img src="https://raw.githubusercontent.com/aryan0078/storykit-skill/main/assets/asset-3172.png" width="46%" alt="An animated interactive widget from the library">
+  <img src="https://raw.githubusercontent.com/aryan0078/storykit-skill/master/assets/asset-knob.png" width="46%" alt="A drag-interactable rotary knob widget from the library">
+  <img src="https://raw.githubusercontent.com/aryan0078/storykit-skill/master/assets/asset-3172.png" width="46%" alt="An animated interactive widget from the library">
 </p>
 
 **BYOM visual essays** — the agent's own model authors the story; StoryKit makes it real:
