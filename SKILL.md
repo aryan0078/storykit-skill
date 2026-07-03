@@ -226,9 +226,14 @@ wire in your real data/colours, combine several — adapt every one, never ship 
 - **Interactive control** — a `noUiSlider`/button that drives a live sim (chain reaction, boids,
   orbit, flock) on a canvas; live readout of state.
 - **Annotated chart** — `d3` + `d3-annotation`, callouts drawn ON the graphic.
-- **Living animation** — a `gsap` + `ScrollTrigger` timeline that plays as the reader scrolls (a
-  machine assembles, a number counts up, elements enter in sequence) so the page breathes instead of
-  sitting static; pin a scene and scrub its timeline, or reveal each section on entry.
+- **Living scroll (the whole page)** — don't just add effects; make **scrolling itself the
+  experience**. Drive the entire story from one cohesive `gsap` + `ScrollTrigger` choreography: PIN a
+  scene and SCRUB a timeline across it so the subject physically transforms as you scroll (assembles,
+  travels, grows, morphs, a number counts up), and REVEAL each section as it enters. Every screen of
+  scroll should reward the reader — something moves, changes or is uncovered, never a static wall.
+  Recipe: `gsap.timeline({scrollTrigger:{trigger:'.scene',start:'top top',end:'+=1200',scrub:true,pin:true}}).to('.thing',{…})`.
+  Keep it smooth and meaningful (motion expresses the idea) — one continuous journey beats scattered
+  effects; the page should feel like a living thing. Reduced-motion degrades gracefully for you.
 - **Unit / waffle / dot grid** — thousands of marks that rearrange to make a proportion visceral.
 - **Reveal illusion / before-after** — show the trick, then a button reveals the truth.
 - **Stepper** — tap/scroll through discrete states (predict → reveal).
