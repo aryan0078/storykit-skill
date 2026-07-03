@@ -186,6 +186,11 @@ standard below, then import it.
 
 ### Pattern catalog — COMPOSE from these, don't reinvent (arrange them freshly per story)
 
+Fetch ready-to-use code: `curl -s https://asset.storykit.space/api/v1/patterns?brief=true` to list
+ids, then `curl -s https://asset.storykit.space/api/v1/patterns/<id>` for one pattern's full
+html/css/js/libs (or the `list_patterns` / `get_pattern` MCP tools). Drop it into your microsite,
+wire in your real data/colours, combine several — adapt every one, never ship it unchanged.
+
 - **Scrollytelling spine** — one sticky full-viewport visual (canvas/SVG) driven by scroll progress
   that TRANSFORMS through stages (e.g. a periodic table → an atom → a reactor). Terse caption steps.
 - **Transform-on-scroll** — an object morphs/zooms/assembles as you scroll.
