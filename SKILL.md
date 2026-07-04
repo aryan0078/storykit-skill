@@ -331,6 +331,13 @@ runs on the user's machine.
      fonts, chart skins and svg scenes, so the page could belong to no other story.
    - **Ground it in real things.** Draw the actual object, annotate a real image, build the specific
      tool. Charts are supporting evidence, not the main event.
+   - **Mobile-first — most readers are on a phone.** Design for a ~390px screen FIRST, then scale up.
+     This is the #1 way BYOM stories break: a desktop-sized hero runs off the edge on mobile. Size
+     **every** font with `clamp()` (e.g. `h1{font-size:clamp(2rem,9vw,5rem)}`) so headlines wrap/shrink
+     and never get cut off; no fixed px widths wider than the viewport; `max-width:100%` on media;
+     reflow to one column on narrow screens; add desktop richness with `@media(min-width:700px)`, not
+     the reverse. Self-check at 390px: nothing cut off, no horizontal scroll. Great-on-desktop but
+     broken-on-mobile is a **failure**.
    - **FULL-PAGE ESSAY MODE (max freedom, zero template).** For a truly bespoke, editorial-grade
      piece, make the ENTIRE story ONE block and design the whole page yourself:
 
