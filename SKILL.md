@@ -312,10 +312,12 @@ runs on the user's machine.
    and the user ask for. **If the user asks for a long / in-depth / comprehensive / detailed essay,
    actually deliver it** — many visual sections, full coverage; don't stop early, summarise, or ship a
    thin 3-section stub. A short essay when the user asked for depth is a failure. Whatever the length,
-   **text is ~20–30% max**: the
-   story is **carried by visual elements** (SVG scenes, diagrams, charts, maps, animations), not
-   paragraphs — a longer story means **more visual beats**, not more prose. Favour one more element
-   over one more paragraph.
+   **minimise text — aim ~15–20%**: the story is **carried by visual elements** (SVG scenes, diagrams,
+   charts, maps, animations), not paragraphs. Cut every sentence a visual can show; keep words to punchy
+   captions and one short line per beat — a text-heavy page loses the reader. **But don't strip
+   meaning:** keep the words a reader genuinely needs to follow the idea, and write more only where an
+   explanation truly requires it or the user asks for depth. A longer story means **more visual beats**,
+   not more prose. Favour one more element over one more paragraph.
 
    **Build at award-winning visual-essay scale.** The bar is the best interactive editorial on the
    web — dense, full-viewport, one cohesive visual world per story, carried by bespoke illustration
