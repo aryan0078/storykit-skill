@@ -203,7 +203,11 @@ author the story to the standard below, then `import_story` it.
    text? Is it mobile-legible? Fix, then import.
 
 **Default = creative, not cinematic.** When the user doesn't specify a style, invent a fresh,
-colourful, subject-driven design — don't default to a dark cinematic look.
+colourful, subject-driven design. Do NOT default to the dark "cinematic" look — near-black background,
+one neon/red accent, a giant number over a void, a generic gradient glow. That template is the #1
+AI-slop tell and makes every story look identical. Derive palette, texture and type from the subject's
+own world (aged paper for history, blueprint for engineering, botanical for nature, terminal-green for
+code). Reserve dark/cinematic only for topics that truly call for it (space, noir, horror).
 
 **No emoji.** This is premium editorial, not a chat message. Don't sprinkle emojis (🚀✨🔥📈🎯) into
 headings, kickers, labels, buttons, captions or body — they cheapen the design and read as AI slop.
@@ -219,7 +223,10 @@ tweak / update** a story that already exists (they refer to "the story", give a 
 previous one), you **must edit it in place** — do NOT create/import a new one (a second story when they
 wanted one changed is a mistake). With their API key: call `get_story_content` (id) to fetch its current
 title/subtitle/theme/blocks, change **only** what they asked, then `update_story` (same id) — the share
-link stays the same. Only create a new story when the user clearly wants a NEW, separate one.
+link stays the same. **Don't know the id?** call `list_my_stories` first and pick the one they mean
+(usually the most recent) — don't make a fresh story. Editing needs the owner's API key; if you don't
+have one, ask the user to connect it rather than creating a duplicate. Only create a new story when the
+user clearly wants a NEW, separate one.
 
 ### Pattern catalog — COMPOSE from these, don't reinvent (arrange them freshly per story)
 
@@ -301,9 +308,11 @@ runs on the user's machine.
    `theme.edition` ∈ {magazine, broadsheet, notebook, terminal, zine, gallery}. Vary text
    placement, break the frame with full-bleed moments, and don't open every story with a dropcap.
 
-   **No fixed length — the user's prompt and your judgment decide.** Make the essay as short or as
-   **long** as the subject and the user ask for; long, in-depth pieces are welcome — don't force a
-   target, follow the user's instructions on length. Whatever the length, **text is ~20–30% max**: the
+   **No fixed length — match the asked depth.** Make the essay as short or as **long** as the subject
+   and the user ask for. **If the user asks for a long / in-depth / comprehensive / detailed essay,
+   actually deliver it** — many visual sections, full coverage; don't stop early, summarise, or ship a
+   thin 3-section stub. A short essay when the user asked for depth is a failure. Whatever the length,
+   **text is ~20–30% max**: the
    story is **carried by visual elements** (SVG scenes, diagrams, charts, maps, animations), not
    paragraphs — a longer story means **more visual beats**, not more prose. Favour one more element
    over one more paragraph.
