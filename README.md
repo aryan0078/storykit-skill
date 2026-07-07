@@ -1,11 +1,10 @@
 # storykit-assets-skill
 
-**Teach any agent to use a free design library — and to publish visual essays with its own model.**
+**Teach any agent to use a free design library.**
 
 An agent skill for [StoryKit](https://storykit.space): plug ready-made design blocks — charts,
-interactive widgets, illustrations, themes — into any project over the free public API, and author
-whole interactive visual essays that StoryKit designs, hosts and shares. No key, no signup.
-_Created with love by Story Kit._ 🍮
+interactive widgets, illustrations, themes — into any project over the free public API. Read-only,
+no key, no signup. _Created with love by Story Kit._ 🍮
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/aryan0078/storykit-skill/master/assets/asset-3174.png" width="46%" alt="A StoryKit EQ-curve widget with the default paper theme">
@@ -24,7 +23,6 @@ npx storykit-assets-skill install
 Installs to `.claude/skills/storykit-assets/SKILL.md`. Reload skills, then ask:
 
 > “Add a StoryKit column chart with my Q1–Q3 numbers to my landing page.”
-> “Research the gold market and publish a StoryKit visual essay about it.”
 
 ### Other agents / custom location
 
@@ -58,14 +56,8 @@ Any agent that reads Markdown skill/instruction files can use it.
   <img src="https://raw.githubusercontent.com/aryan0078/storykit-skill/master/assets/asset-3172.png" width="46%" alt="An animated interactive widget from the library">
 </p>
 
-**BYOM visual essays** — the agent's own model authors the story; StoryKit makes it real:
-
-1. `GET /api/v1/stories/contract` — the StorySpec grammar (pure JSON data, never code; visuals
-   come from the reviewed asset library via `libraryWidget` requests),
-2. `POST /api/v1/stories/import` — no key needed; returns a **private shareUrl** plus a
-   **claimUrl** (sign in at storykit.space to keep the story; premium = permanent, public,
-   SEO-indexed; unclaimed stories expire in ~30 days),
-3. `format: "digest"` for prose-led briefings; `sources` render as themed citations.
+> Looking to publish a full interactive visual essay? Those are researched, designed and published
+> on [storykit.space](https://storykit.space) itself — sign in and commission one.
 
 Prefer MCP? See **[storykit-mcp](https://www.npmjs.com/package/storykit-mcp)** — or point a
 streamable-HTTP client straight at `https://asset.storykit.space/api/v1/mcp` (nothing to install).
