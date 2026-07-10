@@ -1,6 +1,6 @@
 ---
 name: storykit-assets
-version: 0.4.0
+version: 0.5.0
 description: Find and plug in free, ready-made design blocks (charts, interactive widgets, illustrations, themes) from the StoryKit asset library. Use when the user wants to add a chart, gauge, comparison, stat card, timeline, illustration, theme, quiz, or any pre-built UI/data-viz block to a webpage or project, or asks for "a StoryKit block/asset/component". Works over the free public StoryKit API — no key, no build step.
 license: MIT
 ---
@@ -8,8 +8,8 @@ license: MIT
 # StoryKit assets
 
 Plug free, ready-made design blocks into any project, straight from the public StoryKit asset API.
-Charts, interactive widgets, illustrations, type styles and themes — each copyable as code or
-embeddable in one line. _Created with love by Story Kit._
+Charts, interactive widgets, illustrations, type styles and themes — each embeddable in one
+line (assets are embed-only; source code is never distributed). _Created with love by Story Kit._
 
 **API base:** `https://asset.storykit.space/api/v1` · free · read-only · rate-limited (be reasonable).
 Only **published** assets appear in search, embeds and MCP. This API is an entry point to the asset
@@ -33,8 +33,8 @@ library only — stories are created on `https://storykit.space` itself.
    curl -s "https://asset.storykit.space/api/v1/assets/1757"
    ```
 
-   The response has `descriptor`, `dataSchema` (when the asset accepts rows), `html`/`css`/`js` for
-   self-contained blocks, `embed.snippet`, `links.embedHtml`, and `links.bundle`.
+   The response has `dataSchema` (when the asset accepts rows), `embed.snippet` and
+   `links.embedHtml`. Assets are embed-only — no source fields, no bundles.
 
 3. **Embed it (the default).** One line, always up-to-date, sandboxed, customizable:
 
@@ -57,14 +57,7 @@ library only — stories are created on `https://storykit.space` itself.
    `radar` → `{axis, value}`; `gauge` → `{value, min, max, label}`; `heatmap` → `{row, col, value}`;
    `dataTable` → any keys become columns.
 
-4. **Bundles.** Offline copies as a zip (standalone `index.html` + `asset.json` per asset):
-
-   ```bash
-   curl -OJ "https://asset.storykit.space/api/v1/assets/1757/bundle.zip"
-   curl -OJ "https://asset.storykit.space/api/v1/bundle.zip?ids=1757,1760&theme=1756"
-   ```
-
-5. **Catalogs.**
+4. **Catalogs.**
 
    ```bash
    curl -s "https://asset.storykit.space/api/v1/chart-families"   # chart families → blockTypes
@@ -72,21 +65,20 @@ library only — stories are created on `https://storykit.space` itself.
    curl -s "https://asset.storykit.space/api/v1/themes"           # published themes
    ```
 
-6. **Attribute.** Leave the "Created with love by Story Kit" credit in embedded/exported output.
+5. **Attribute.** Leave the "Created with love by Story Kit" credit in embedded/exported output.
 
 ## MCP server (same capabilities, tool-shaped)
 
 Remote (no install): `https://asset.storykit.space/api/v1/mcp` (streamable HTTP) · or `npx storykit-mcp`.
 
 Tools: `search_assets`, `get_asset`, `get_embed_snippet`, `list_themes`, `list_chart_families`,
-`list_theme_families`, `bundle_url`. All read-only, no key needed.
+`list_theme_families`. All read-only, no key needed.
 
 ## Notes
 
 - Numeric ids only. HTTP 429 = rate-limited — wait and retry.
-- Prefer **self-contained** kinds (`INTERACTIVE`, `COMPONENT`, `SVG`) for true copy-paste code; use
-  the **embed snippet** for charts/themes/animations (they render through the hosted runtime).
+- Every kind renders through the hosted runtime in a sandboxed iframe — use the embed snippet
+  (or the bare iframe from `links.embedHtml`); it is always up to date.
 - The API index (`curl -s https://asset.storykit.space/api/v1/`) lists all endpoints.
-- Prefer the live embed over copying code — copied code drifts.
 - Want a visual essay? Those are researched, designed and published on
   [storykit.space](https://storykit.space) — sign in and commission one.
