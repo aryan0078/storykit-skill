@@ -1,6 +1,6 @@
 {
   "name": "storykit-assets-skill",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Agent skill for mapping authorized user data to relevant StoryKit widgets and returning opaque hosted resources without exposing widget code.",
   "license": "MIT",
   "author": "aryan0078 (https://storykit.space)",
@@ -28,7 +28,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/aryan0078/storykit-skill.git"
+    "url": "git+https://github.com/aryan0078/storykit-skill.git"
   },
   "homepage": "https://asset.storykit.space/skills"
 }
