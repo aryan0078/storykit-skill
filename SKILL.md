@@ -1,84 +1,51 @@
 ---
-name: storykit-assets
-version: 0.5.0
-description: Find and plug in free, ready-made design blocks (charts, interactive widgets, illustrations, themes) from the StoryKit asset library. Use when the user wants to add a chart, gauge, comparison, stat card, timeline, illustration, theme, quiz, or any pre-built UI/data-viz block to a webpage or project, or asks for "a StoryKit block/asset/component". Works over the free public StoryKit API — no key, no build step.
+name: storykit-data-widgets
+version: 1.0.0
+description: Turn user-provided or relevant structured data into a beautiful hosted StoryKit widget. Use when the user wants to visualize health, finance, system, productivity, sports, weather, or other data. Search by intent, map rows to the selected schema, and return the hosted widget resource without exposing implementation code.
 license: MIT
 ---
 
-# StoryKit assets
+# StoryKit data widgets
 
-Plug free, ready-made design blocks into any project, straight from the public StoryKit asset API.
-Charts, interactive widgets, illustrations, type styles and themes — each embeddable in one
-line (assets are embed-only; source code is never distributed). _Created with love by Story Kit._
+Use StoryKit to select a relevant published widget and bind real structured data into an opaque,
+hosted render. Do not fetch, reproduce, or return the widget's HTML, CSS, JavaScript, embed snippet,
+or internal descriptor.
 
-**API base:** `https://asset.storykit.space/api/v1` · free · read-only · rate-limited (be reasonable).
-Only **published** assets appear in search, embeds and MCP. This API is an entry point to the asset
-library only — stories are created on `https://storykit.space` itself.
+Remote MCP: `https://asset.storykit.space/api/v1/mcp`
 
-**Kinds:** `CHART_VARIANT`, `THEME`, `ANIMATION`, `TEXT_STYLE`, `COMPONENT`, `SVG`, `INTERACTIVE`.
+## Required workflow
 
-## Workflow
+1. Establish what the data should communicate and identify the fields already available. Never
+   invent readings, measurements, timestamps, or source facts.
+2. Before transmitting personal, health, location, account, or device data, tell the user that the
+   selected rows will be sent to StoryKit for hosted rendering and obtain their consent. Minimize
+   the payload and omit names, email addresses, tokens, credentials, and direct identifiers.
+3. Call `find_widgets` with a concise `intent`, optional `domain`, and `dataFields`. Do not use legacy
+   asset-search, asset-fetch, snippet, source, or bundle endpoints.
+4. Compare the returned `dataSchema` values. Select the widget whose required fields and visual
+   purpose best match the data, not simply the first result.
+5. Map the real rows to that schema without changing their meaning, units, ordering, or precision.
+   Required fields must be present on every row. Keep the payload within 200 rows and 64 KB.
+6. Call `render_widget` with `widgetId`, the mapped `data`, and only optional theme colors requested
+   by the user. Use the default 30-day lifetime unless the user asks for another value (1-365 days).
+7. Present or attach the returned MCP `resource_link`. Do not turn it into implementation code and
+   do not echo sensitive input rows. State the expiry when useful.
 
-1. **Search** for a block:
+## Output rules
 
-   ```bash
-   curl -s "https://asset.storykit.space/api/v1/assets?q=column&kind=CHART_VARIANT&size=8"
-   ```
+- The hosted URL is an access grant: anyone who has it can see the rendered data. Treat it as a
+  secret and do not place it in public source control, logs, or unrelated messages.
+- Renders are immutable snapshots. When data changes, create a new render instead of modifying the
+  old URL.
+- If no result fits the schema or intent, refine `find_widgets` once with a more specific intent or
+  kind. Do not force data into an unrelated widget.
+- If the data is unavailable, ask for it or obtain it from an authorized source before rendering.
+- Leave the StoryKit credit in the hosted resource.
 
-   Sorts: `newest` (default), `used`, `name`. Paginate with `page` + `size` (≤50).
+## Tool summary
 
-2. **Fetch the full asset:**
+- `find_widgets`: safe capability discovery; returns identity, type, usage, and accepted schema only.
+- `render_widget`: validates and encrypts rows, then returns an expiring hosted HTML resource.
+- `list_widget_themes`: optional palette discovery; returns palette data only.
 
-   ```bash
-   curl -s "https://asset.storykit.space/api/v1/assets/1757"
-   ```
-
-   The response has `dataSchema` (when the asset accepts rows), `embed.snippet` and
-   `links.embedHtml`. Assets are embed-only — no source fields, no bundles.
-
-3. **Embed it (the default).** One line, always up-to-date, sandboxed, customizable:
-
-   ```html
-   <div data-sk-asset="1757"
-        data-sk-items='[{"label":"Q1","value":64},{"label":"Q2","value":41}]'
-        data-sk-accent="#b8860b" data-sk-paper="#14110b" data-sk-ink="#f3e9d2"></div>
-   <script src="https://asset.storykit.space/sk-embed.js" async></script>
-   ```
-
-   - `data-sk-items` — your rows (shape per the asset's `dataSchema`; omit for sample data).
-   - `data-sk-accent` / `data-sk-accent2` / `data-sk-paper` / `data-sk-ink` / `data-sk-surface` —
-     colors (hex or CSS names); the asset re-skins itself.
-   - `data-sk-height` — fixed height (otherwise auto-resizes after load).
-   - Or `StoryKit.mount(el, id, items)` from JavaScript after loading `sk-embed.js`.
-
-   Row shapes by chart `blockType`: `barChart`/`donutChart`/`waffle`/`funnel`/`dotPlot`/`treemap`
-   → `{label, value}`; `lineChart`/`area` → `{x, y}` (+ optional `series`); `scatter` → `{label, x, y}`;
-   `bubble` → `{label, x, y, size}`; `slope` → `{label, left, right}`; `map` → `{place, value}`;
-   `radar` → `{axis, value}`; `gauge` → `{value, min, max, label}`; `heatmap` → `{row, col, value}`;
-   `dataTable` → any keys become columns.
-
-4. **Catalogs.**
-
-   ```bash
-   curl -s "https://asset.storykit.space/api/v1/chart-families"   # chart families → blockTypes
-   curl -s "https://asset.storykit.space/api/v1/theme-families"   # editorial palette families
-   curl -s "https://asset.storykit.space/api/v1/themes"           # published themes
-   ```
-
-5. **Attribute.** Leave the "Created with love by Story Kit" credit in embedded/exported output.
-
-## MCP server (same capabilities, tool-shaped)
-
-Remote (no install): `https://asset.storykit.space/api/v1/mcp` (streamable HTTP) · or `npx storykit-mcp`.
-
-Tools: `search_assets`, `get_asset`, `get_embed_snippet`, `list_themes`, `list_chart_families`,
-`list_theme_families`. All read-only, no key needed.
-
-## Notes
-
-- Numeric ids only. HTTP 429 = rate-limited — wait and retry.
-- Every kind renders through the hosted runtime in a sandboxed iframe — use the embed snippet
-  (or the bare iframe from `links.embedHtml`); it is always up to date.
-- The API index (`curl -s https://asset.storykit.space/api/v1/`) lists all endpoints.
-- Want a visual essay? Those are researched, designed and published on
-  [storykit.space](https://storykit.space) — sign in and commission one.
+The service is free, requires no API key, and is rate-limited per caller IP.

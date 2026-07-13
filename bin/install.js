@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 /**
- * Installer for the StoryKit assets agent skill — Created with love by Story Kit.
+ * Installer for the StoryKit data-widgets agent skill.
  *
  * Copies SKILL.md into a skills directory the agent can discover. Defaults to
- * `.claude/skills/storykit-assets/` (Claude Code); override with `--dir <path>`.
+ * `.claude/skills/storykit-data-widgets/` (Claude Code); override with `--dir <path>`.
  *
  *   npx storykit-assets-skill install
  *   npx storykit-assets-skill install --dir ./skills
@@ -19,7 +19,7 @@ const args = process.argv.slice(2)
 const dirFlag = args.indexOf('--dir')
 const targetDir = dirFlag !== -1 && args[dirFlag + 1]
   ? resolve(args[dirFlag + 1])
-  : resolve('.claude', 'skills', 'storykit-assets')
+  : resolve('.claude', 'skills', 'storykit-data-widgets')
 
 if (!existsSync(src)) {
   console.error('Could not find SKILL.md in the package. Reinstall storykit-assets-skill.')
@@ -30,6 +30,6 @@ mkdirSync(targetDir, { recursive: true })
 const dest = join(targetDir, 'SKILL.md')
 copyFileSync(src, dest)
 
-console.log(`✓ StoryKit assets skill installed → ${dest}`)
-console.log('  Restart your agent / reload skills, then ask it to "add a StoryKit chart".')
+console.log(`StoryKit data-widgets skill installed: ${dest}`)
+console.log('Restart your agent, connect StoryKit MCP, then ask it to visualize your data.')
 console.log('  Created with love by Story Kit.')

@@ -1,65 +1,42 @@
 # storykit-assets-skill
 
-**Teach any agent to use a free design library.**
-
-An agent skill for [StoryKit](https://storykit.space): plug ready-made design blocks — charts,
-interactive widgets, illustrations, themes — into any project over the free public API. Read-only,
-no key, no signup. _Created with love by Story Kit._ 🍮
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/aryan0078/storykit-skill/master/assets/asset-3174.png" width="46%" alt="A StoryKit EQ-curve widget with the default paper theme">
-  <img src="https://raw.githubusercontent.com/aryan0078/storykit-skill/master/assets/asset-themed.png" width="46%" alt="The same widget re-inked gold on dark via URL theme params">
-</p>
-<p align="center"><em>One live asset, two pages — re-inked with URL params, zero CSS written.</em></p>
+Teach an agent to turn authorized structured data into a relevant, hosted StoryKit widget. The skill
+directs the agent to search by intent, obey the selected data schema, protect sensitive inputs, and
+return the MCP resource link without fetching or reproducing widget implementation code.
 
 ## Install
-
-### Claude Code
 
 ```bash
 npx storykit-assets-skill install
 ```
 
-Installs to `.claude/skills/storykit-assets/SKILL.md`. Reload skills, then ask:
-
-> “Add a StoryKit column chart with my Q1–Q3 numbers to my landing page.”
-
-### Other agents / custom location
+This installs `SKILL.md` at `.claude/skills/storykit-data-widgets/SKILL.md`. Reload skills and connect
+the free StoryKit MCP endpoint:
 
 ```bash
-npx storykit-assets-skill install --dir ./skills
-# or just fetch the file
-curl -L https://asset.storykit.space/skill/SKILL.md -o SKILL.md
+claude mcp add --transport http storykit https://asset.storykit.space/api/v1/mcp
 ```
 
-Any agent that reads Markdown skill/instruction files can use it.
+For another agent or directory:
 
-## What it teaches your agent
-
-**Embed-first design blocks** over `https://asset.storykit.space/api/v1`:
-
-- search the library by text + kind (`CHART_VARIANT`, `COMPONENT`, `INTERACTIVE`, `SVG`, `THEME`, …),
-- embed any block in one line — your data via `data-sk-items`, your colors via
-  `data-sk-accent/paper/ink/surface/accent2`,
-- route chart picks through `/chart-families` (65+ families),
-- compose themed multi-block `.zip` exports.
-
-```html
-<div data-sk-asset="1757"
-     data-sk-items='[{"label":"North","value":64},{"label":"South","value":41}]'
-     data-sk-accent="#b8860b" data-sk-paper="#14110b"></div>
-<script src="https://asset.storykit.space/sk-embed.js" async></script>
+```bash
+npx storykit-assets-skill install --dir ./skills/storykit-data-widgets
 ```
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/aryan0078/storykit-skill/master/assets/asset-knob.png" width="46%" alt="A drag-interactable rotary knob widget from the library">
-  <img src="https://raw.githubusercontent.com/aryan0078/storykit-skill/master/assets/asset-3172.png" width="46%" alt="An animated interactive widget from the library">
-</p>
+The current hosted skill is also available at
+[`asset.storykit.space/skill/SKILL.md`](https://asset.storykit.space/skill/SKILL.md).
 
-> Looking to publish a full interactive visual essay? Those are researched, designed and published
-> on [storykit.space](https://storykit.space) itself — sign in and commission one.
+## What the skill enforces
 
-Prefer MCP? See **[storykit-mcp](https://www.npmjs.com/package/storykit-mcp)** — or point a
-streamable-HTTP client straight at `https://asset.storykit.space/api/v1/mcp` (nothing to install).
+- Use `find_widgets` for safe discovery and compare the returned data schemas.
+- Never invent readings or force rows into an unrelated schema.
+- Ask for consent before transmitting health, location, account, device, or personal data.
+- Minimize rows and exclude credentials, access tokens, and direct identifiers.
+- Use `render_widget` and present its expiring resource link; never request or output source/snippets.
+- Treat the hosted URL as a secret because anyone with it can view the rendered data.
+- Create a new immutable render when data changes.
 
-MIT licensed.
+StoryKit's public service requires no API key. It validates bounded payloads, encrypts them at rest,
+and deletes renders after their configured lifetime.
+
+MIT. Created with love by [Story Kit](https://storykit.space).
