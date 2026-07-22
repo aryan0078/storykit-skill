@@ -1,100 +1,64 @@
 ---
 name: storykit-data-widgets
-version: 2.1.0
-description: Map authorized structured data to hosted StoryKit widgets (public MCP, no key). Also drive Image Studio, Brand AI, series, and workflows via personal Studio MCP (API key). Use for data visualization, image generate/edit, brand extract, or installing StoryKit for Claude/Codex/Cursor.
+version: 1.3.0
+description: Hosted StoryKit widgets (public MCP) and Studio Image/Brand tools (personal key). CRITICAL — never invent images; always use StoryKit MCP tools for generation.
 license: MIT
 ---
 
 # StoryKit agents
 
-Two MCP surfaces. Do not confuse them.
+## HARD RULE — never generate images yourself
 
-| Surface | URL | Auth | Purpose |
-| --- | --- | --- | --- |
-| **Public widgets** | `https://asset.storykit.space/api/v1/mcp` | None | `find_widgets`, `render_widget`, `list_widget_themes` |
-| **Studio** | `https://asset.storykit.space/api/v1/studio-mcp` | Personal `sk_live_…` | Image AI, Brand AI, series, workflows, media |
-| **Admin** | `https://storykit.space/api/v1/admin-mcp` | 24h admin key | Newsroom only |
+You MUST NOT create images with your own tools (DALL·E, Midjourney, Gemini/Imagen/Flux, built-in
+image_gen, Unsplash, data: URLs, invented CDN links, or “placeholder” photos).
 
-AI Integration (mint key + LLM prompt): https://asset.storykit.space/ai
+| Need | Use this |
+| --- | --- |
+| User images (Studio) | `generate_image` / `edit_image` on **Studio MCP** → poll `get_image_job` → use `outputUrl` |
+| Article/essay photos (admin) | `plan_article_images` → `generate_article_image_pack` → place returned urls only |
+| Gallery widgets | `import_asset` with **inline SVG/HTML/CSS/JS code only** — no external rasters |
+| Data charts | `find_widgets` → `render_widget` (public MCP) |
+
+If MCP image tools fail: use **inline SVG** only. Never fall back to another image model.
+
+---
+
+## Surfaces
+
+| Surface | URL | Auth |
+| --- | --- | --- |
+| Public widgets | `https://asset.storykit.space/api/v1/mcp` | None |
+| Studio (users) | `https://asset.storykit.space/api/v1/studio-mcp` | `sk_live_…` |
+| Admin (newsroom) | `https://storykit.space/api/v1/admin-mcp` | 24h `X-Admin-Key` |
+
+Mint user keys: https://asset.storykit.space/ai
 
 ## Install
 
 ```bash
-npx -y storykit-assets-skill install
-# or
-curl -L https://asset.storykit.space/skill/SKILL.md -o SKILL.md
-```
-
-```bash
-# Public widgets
-claude mcp add --transport http storykit https://asset.storykit.space/api/v1/mcp
-
-# Studio (after minting a key)
+npx -y storykit-assets-skill
 export STORYKIT_API_KEY="sk_live_…"
 claude mcp add --transport http storykit-studio https://asset.storykit.space/api/v1/studio-mcp \
   --header "Authorization: Bearer ${STORYKIT_API_KEY}"
-
-# Or stdio package (Studio tools when key is set)
-claude mcp add storykit -- npx -y storykit-mcp
+claude mcp add --transport http storykit https://asset.storykit.space/api/v1/mcp
 ```
 
-New emails auto-create a FREE StoryKit account. Track usage: https://storykit.space/me
+## Public widgets (no key)
 
----
+Consent for personal data → `find_widgets` → map rows → `render_widget` → treat URL as secret.
 
-## Public widgets MCP (no key)
+## Studio MCP (user API key)
 
-1. Establish intent and real fields. Never invent readings.
-2. Consent before personal/health/location/account/device data.
-3. `find_widgets` → pick matching `dataSchema` → `render_widget`.
-4. Present the hosted resource link; treat URL as a secret. Do not echo rows.
-5. Leave StoryKit credit in place.
+1. `get_account` (quota)
+2. Optional `upload_media` (base64 refs)
+3. `generate_image` or `edit_image`
+4. Poll `get_image_job` until SUCCEEDED
+5. Return **only** the platform `outputUrl`
 
-Max 200 rows / 64 KB. Default TTL 30 days (1–365). Immutable — re-render when data changes.
+Also: `describe_image`, `extract_brand_kit`, series, workflows. Plan limits enforced server-side.
 
----
+## Admin External Author
 
-## Studio MCP (personal API key)
-
-Auth: `Authorization: Bearer sk_live_…` or `X-Api-Key: sk_live_…`
-
-**Always call `get_account` / `studio_get_account` first.**
-
-### Plan limits
-
-| Plan | Images / month | Pending | Brand extract / day | Batch |
-| --- | --- | --- | --- | --- |
-| FREE | 3 | 1 | 1 | No |
-| BASIC | 40 | 3 | 5 | No |
-| PRO | 160 | 6 | 15 | Yes |
-
-Failed/cancelled image jobs do not consume allowance.
-
-### Tools (remote names; stdio package prefixes with `studio_`)
-
-**Account** — `get_account`, `get_image_status`  
-**Media** — `upload_media` `{ imageBase64 }`, `list_media`, `get_media`, `trash_media`  
-**Image** — `generate_image`, `edit_image`, `list_images`, `get_image_job`, `cancel_image_job`, `retry_image_job`, `describe_image`, `publish_image`, `batch_generate_images`  
-**Prompt** — `compile_prompt`, `analyze_image_to_prompt`, `get_vision_job`  
-**Brand** — `list_brand_kits`, `get_brand_kit`, `extract_brand_kit`, `refine_brand_kit`, `brand_showcase`  
-**Series** — `list_series`, `create_series`, `series_next`, `series_extend`  
-**Workflows** — `list_workflows`, `create_workflow`, `run_workflow`
-
-### Workflows
-
-**Generate:** get_account → optional upload_media → generate_image → poll get_image_job → return outputUrl  
-**Edit:** upload_media → edit_image → poll  
-**Brand:** extract_brand_kit with imagesBase64 → use kit id as brandKitId  
-
-### Safety
-
-- Preserve `STORYKIT_API_KEY`. Never invent keys or ownerIds.
-- Do not put the key in git or public chat.
-- Never claim success without a SUCCEEDED job.
-
-## REST
-
-- `GET /api/v1/studio-connect` — discovery  
-- `POST /api/v1/studio-connect/key` `{ email, name?, label? }` — mint (auto FREE signup)  
-- `GET /api/v1/studio-connect/prompt` — LLM template  
-- Page: https://asset.storykit.space/ai
+Pictured essays: **must** run Image AI pack tools before any `<img>`. Only MCP-returned
+`https://storykit.space/api/v1/images/{id}/content` (or equivalent same-origin) urls. Place with
+`sk-img-bleed|half|inset|texture|motif`, then `import_story`.
