@@ -31,5 +31,7 @@ const dest = join(targetDir, 'SKILL.md')
 copyFileSync(src, dest)
 
 console.log(`StoryKit data-widgets skill installed: ${dest}`)
-console.log('Restart your agent, connect StoryKit MCP, then ask it to visualize your data.')
+console.log('Restart your agent / reload skills.')
+console.log('  Widgets (no key): https://asset.storykit.space/api/v1/mcp')
+console.log('  Studio (API key): https://asset.storykit.space/ai')
 console.log('  Created with love by Story Kit.')
