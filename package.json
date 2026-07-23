@@ -1,7 +1,7 @@
 {
   "name": "storykit-assets-skill",
-  "version": "2.3.0",
-  "description": "StoryKit agent skill: hosted widgets + Studio Image MCP. Never invent images — always call StoryKit tools.",
+  "version": "2.5.0",
+  "description": "StoryKit agent skill: full Studio MCP tool sheet (images/media/brands/\u2026) + public widgets. Must use studio-mcp for images.",
   "license": "MIT",
   "author": "aryan0078 (https://storykit.space)",
   "type": "module",

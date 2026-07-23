@@ -1,69 +1,181 @@
 ---
 name: storykit-data-widgets
-version: 1.5.0
-description: StoryKit public widgets + Studio MCP with full image tools (generate_image, edit_image, …). Must use studio-mcp URL with API key — public /api/v1/mcp has NO image tools.
+version: 2.5.0
+description: StoryKit Studio MCP — full image + media + brand + canvas + series/batch tools. MUST use studio-mcp with API key. Public /api/v1/mcp has NO images.
 license: MIT
 ---
 
-# StoryKit agents
+# StoryKit agents — MCP tool sheet
 
-## Which MCP server?
+## CRITICAL: which server?
 
-| URL | Auth | Tools |
+| URL | Auth | What you get |
 | --- | --- | --- |
-| **`https://asset.storykit.space/api/v1/studio-mcp`** | `Authorization: Bearer sk_live_…` | **Images**, media, brands, canvases, assets, series, workflows (~65 tools) |
-| `https://asset.storykit.space/api/v1/mcp` | None | **Only** `find_widgets`, `render_widget`, `list_widget_themes` |
+| **`https://asset.storykit.space/api/v1/studio-mcp`** | `Authorization: Bearer sk_live_…` | **Full Studio** (~69 tools): images, media, brands, canvases, assets, series, workflows |
+| `https://asset.storykit.space/api/v1/mcp` | none | **Only** `find_widgets`, `render_widget`, `list_widget_themes` |
 
-If `tools/list` does **not** include `generate_image`, you are on the **wrong** server. Reconnect to **studio-mcp** with the API key.
+If `tools/list` lacks `generate_image`, you are on the **wrong URL**.
 
 Mint keys: https://asset.storykit.space/ai
 
-```bash
-export STORYKIT_API_KEY="sk_live_…"
-# Remote Studio MCP (HTTP) — preferred for images
-# URL: https://asset.storykit.space/api/v1/studio-mcp
-# Header: Authorization: Bearer $STORYKIT_API_KEY
-
-# Or stdio package (registers studio_* tools when key is set)
-npx -y storykit-mcp
+```text
+Studio MCP URL: https://asset.storykit.space/api/v1/studio-mcp
+Header: Authorization: Bearer sk_live_…
 ```
+
+Or: `STORYKIT_API_KEY=sk_live_…` + `npx -y storykit-mcp` (tools named `studio_*`).
+
+---
 
 ## HARD RULES
 
-1. **No external image generation** (DALL·E, Midjourney, Gemini image, Flux, built-in image_gen, Unsplash).
-2. **No invented account data** — list/get via MCP first.
-3. Images only via StoryKit tools; return `outputUrl` only after `get_image_job` → **SUCCEEDED**.
+1. Never invent images (DALL·E, Midjourney, Gemini image, built-in image_gen, Unsplash).
+2. Never invent ids — call `list_*` / `get_*` first.
+3. After `generate_image` / `edit_image`, poll `get_image_job` until **SUCCEEDED**; return platform `outputUrl` only.
 
-## Image tools (Studio MCP)
+---
 
-| Tool | Also aliases | Purpose |
+## Image tools (must exist on Studio MCP)
+
+| Tool | Aliases | Spec |
 | --- | --- | --- |
-| `generate_image` | `image_generate`, `img_generate` | Queue new image |
-| `edit_image` | `image_edit`, `img_edit` | Edit with references |
-| `list_images` | | My generations |
-| `get_image_job` | | Poll status |
-| `cancel_image_job` / `retry_image_job` / `delete_image_job` | | Manage jobs |
-| `describe_image` | | Image → text |
-| `publish_image` / `unpublish_image` / `save_image_as_kit` | | Gallery / brand |
-| `batch_generate_images` | | PRO bulk |
-| `upload_media` / `list_media` / `get_media` / `get_media_content` | | Library |
-| `get_image_status` | | Queue / readiness |
-| `analyze_image_to_prompt` / `compile_prompt` / `get_vision_job` | | Prompt builder |
+| `generate_image` | `image_generate`, `img_generate` | `{ prompt, aspect?, qualityMode?, brandKitId?, referenceMediaIds?, count?, magicPrompt?, caption?, mode? }` → job; poll `get_image_job` |
+| `edit_image` | `image_edit`, `img_edit` | `{ prompt, referenceMediaIds[1..5], maskMediaId?, aspect?, count? }` |
+| `list_images` | | `{ query?, state? }` state e.g. SUCCEEDED |
+| `get_image_job` | | `{ jobId? }` or `{ id? }` — poll until SUCCEEDED/FAILED |
+| `cancel_image_job` | | `{ jobId }` — no quota burn |
+| `retry_image_job` | | `{ jobId }` |
+| `delete_image_job` | | `{ jobId }` archive |
+| `describe_image` | | `{ mediaId? }` or `{ generationId? }` |
+| `publish_image` / `unpublish_image` | | `{ id }` numeric generation id |
+| `save_image_as_kit` | | `{ jobId }` → brand kit |
+| `batch_generate_images` | | PRO: `{ prompts[], aspect?, brandKitId?, qualityMode? }` |
+| `get_image_status` | | workstation + quota |
 
-stdio package names: prefix with `studio_` (e.g. `studio_generate_image`).
+**Aspects:** `square` `portrait` `poster` `story` `landscape` `banner`  
+**qualityMode:** `fast` | `quality`
 
-## Image workflow
+### Image workflow
 
-1. `get_account` or `get_usage`
-2. Optional `upload_media` `{ imageBase64 }` → `mediaId`
-3. `generate_image` `{ prompt, aspect?, referenceMediaIds? }` **or** `edit_image`
-4. Poll `get_image_job` until `SUCCEEDED`
-5. Return platform `outputUrl` only
+1. `get_account` or `get_usage`  
+2. Optional `upload_media` `{ imageBase64, contentType?, filename? }` → `mediaId`  
+3. `generate_image` or `edit_image`  
+4. Loop `get_image_job` until SUCCEEDED  
+5. Return `outputUrl` only  
 
-## Other Studio tools
+---
 
-Brands, canvases, commissioned assets, series, workflows — full list via `tools/list` on studio-mcp.
+## Media library
 
-## Public widgets (no key)
+| Tool | Spec |
+| --- | --- |
+| `list_media` | `{ query?, kind?, trash? }` |
+| `get_media` | `{ id }` metadata |
+| `get_media_content` | `{ id }` base64 ≤2MB |
+| `upload_media` | `{ imageBase64, contentType?, filename? }` |
+| `update_media` | `{ id, title?, tags? }` |
+| `star_media` | `{ id, starred }` |
+| `trash_media` / `restore_media` / `delete_media` | `{ id }` |
 
-`find_widgets` → `render_widget` on **public** MCP only. Not for Image Studio.
+---
+
+## Prompt / vision
+
+| Tool | Spec |
+| --- | --- |
+| `compile_prompt` | `{ draft }` → caption JSON for `generate_image.caption` (see draft shape below) |
+| `analyze_image_to_prompt` | `{ imageBase64, contentType?, aspect?, layout? }` → job |
+| `get_vision_job` | `{ jobId, apply? }` set apply=true when done |
+
+`compile_prompt` draft shape (all fields required unless noted):
+
+```json
+{
+  "aspect": "poster",
+  "layout": "product",
+  "highLevelDescription": "One clear hero subject…",
+  "background": "Full-bleed paper ground…",
+  "style": {
+    "aesthetics": "editorial still life…",
+    "lighting": "soft studio light…",
+    "medium": "graphic_design",
+    "photo": "",
+    "artStyle": "polished editorial graphic…",
+    "colorPalette": ["#111", "#f5f0e8"]
+  },
+  "elements": [
+    { "id": "hero", "type": "obj", "role": "hero", "description": "Central subject…" }
+  ]
+}
+```
+
+Rules: exactly one of `style.photo` or `style.artStyle`; if `medium` is `photograph`, set `photo` and leave `artStyle` empty.
+
+---
+
+## Brands
+
+| Tool | Spec |
+| --- | --- |
+| `list_brand_kits` | `{ query?, page?, size? }` |
+| `get_brand_kit` | `{ id }` full DNA JSON |
+| `extract_brand_kit` | `{ imagesBase64:[{base64,contentType?}], prompt?, md? }` 1–5 images |
+| `refine_brand_kit` | `{ id, feedback }` |
+| `rename_brand_kit` | `{ id, name }` |
+| `duplicate_brand_kit` | `{ id, name? }` |
+| `delete_brand_kit` | `{ id }` |
+| `publish_brand_kit` / `unpublish_brand_kit` | `{ id }` |
+| `brand_showcase` | `{ id, count? }` queues showcase gens |
+
+---
+
+## Canvases
+
+| Tool | Spec |
+| --- | --- |
+| `list_canvases` | `{}` |
+| `get_canvas` | `{ id }` includes `doc` JSON |
+| `create_canvas` | `{ title?, aspect? }` |
+| `save_canvas` | `{ id, title?, aspect?, doc?, thumbnailMediaId? }` |
+| `duplicate_canvas` / `delete_canvas` | `{ id }` |
+
+---
+
+## Studio assets (commissioned widgets)
+
+| Tool | Spec |
+| --- | --- |
+| `list_studio_assets` | `{}` |
+| `get_studio_asset` | `{ id }` versions; **no** html/css/js source |
+| `commission_studio_asset` | `{ prompt, kind?, purpose?, sourceMd? }` |
+| `iterate_studio_asset` | `{ id, feedback }` |
+| `rename_studio_asset` | `{ id, title }` |
+| `trash_studio_asset` / `restore_studio_asset` | `{ id }` |
+| `list_folders` / `create_folder` | `{ name }` for create |
+
+---
+
+## Series & workflows
+
+| Tool | Spec |
+| --- | --- |
+| `list_series` / `get_series` | `{ id }` for get |
+| `create_series` | `{ title, description?, brandKitId?, referenceMediaIds?, aspect?, storyline? }` |
+| `series_next` | `{ id, instruction?, aspect? }` |
+| `series_extend` | `{ id, storyline?, sections?, aspect? }` 1–20 sections |
+| `delete_series` | `{ id }` |
+| `list_workflows` / `get_workflow` | |
+| `create_workflow` / `update_workflow` | `{ title?, description?, brandKitId?, steps? }` |
+| `run_workflow` | `{ id, title?, brandKitId?, steps? }` |
+| `delete_workflow` / `list_workflow_runs` | |
+
+---
+
+## Account
+
+- `get_account` — identity + quotas + tool summary  
+- `get_usage` — full limits snapshot  
+
+## Public widgets (separate server)
+
+On **public** MCP only: `find_widgets` → map rows → `render_widget`. Not for Image Studio.
